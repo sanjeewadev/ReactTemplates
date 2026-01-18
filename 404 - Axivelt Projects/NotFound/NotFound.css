@@ -1,0 +1,217 @@
+/* NotFound.css */
+
+.dyno-404-page {
+  position: relative;
+  /* FIX: Use min-height instead of fixed height to prevent cutoff on small vertical screens */
+  min-height: 100vh;
+  width: 100%;
+  background-color: #050505;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-align: center;
+  padding: 2rem; /* Safety padding */
+}
+
+/* Background Texture */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dyno-404-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Ensure it doesn't touch edges on mobile */
+  width: 100%;
+  max-width: 600px;
+}
+
+/* --- THE GLITCH 404 --- */
+.error-code-wrapper {
+  margin-bottom: 1rem;
+}
+
+.glitch-text {
+  font-family: "Oswald", sans-serif;
+  /* Clamp handles responsiveness perfectly here */
+  font-size: clamp(6rem, 20vw, 15rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -5px; /* Reduced slightly for mobile readability */
+  line-height: 1;
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+/* Glitch Keyframes (Kept same as yours - they are good) */
+@keyframes glitch-anim {
+  0% {
+    clip: rect(31px, 9999px, 94px, 0);
+  }
+  20% {
+    clip: rect(6px, 9999px, 3px, 0);
+  }
+  40% {
+    clip: rect(82px, 9999px, 24px, 0);
+  }
+  60% {
+    clip: rect(13px, 9999px, 76px, 0);
+  }
+  80% {
+    clip: rect(55px, 9999px, 11px, 0);
+  }
+  100% {
+    clip: rect(27px, 9999px, 63px, 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(65px, 9999px, 100px, 0);
+  }
+  20% {
+    clip: rect(12px, 9999px, 6px, 0);
+  }
+  40% {
+    clip: rect(48px, 9999px, 32px, 0);
+  }
+  60% {
+    clip: rect(21px, 9999px, 85px, 0);
+  }
+  80% {
+    clip: rect(72px, 9999px, 15px, 0);
+  }
+  100% {
+    clip: rect(38px, 9999px, 59px, 0);
+  }
+}
+
+/* --- MESSAGE --- */
+.error-message {
+  margin-bottom: 3rem;
+  max-width: 90%; /* Prevent touching edges */
+}
+
+.error-icon {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.error-message h2 {
+  font-family: "Oswald", sans-serif;
+  color: white;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.error-message p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* --- BUTTON --- */
+.btn-return {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: black;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-return:hover {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+  transform: translateY(-2px);
+}
+
+/* --- AXIVELT CREDIT --- */
+.axivelt-credit {
+  position: absolute;
+  bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  z-index: 5;
+}
+
+/* Mobile Tweak for Credit */
+@media (max-height: 600px) {
+  .axivelt-credit {
+    position: relative; /* On very short screens, let it flow naturally */
+    margin-top: 3rem;
+    bottom: auto;
+  }
+}
+
+.credit-line {
+  width: 40px;
+  height: 2px;
+  background: var(--color-text-muted);
+  opacity: 0.3;
+}
+
+.axivelt-credit p {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+}
+
+.axivelt-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.axivelt-link:hover {
+  color: var(--color-primary);
+}
